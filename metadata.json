@@ -1,0 +1,6 @@
+{
+  "name": "Real Learning — Super Admin Dashboard",
+  "description": "Super Admin management and monitoring dashboard for the Real Learning platform, covering Users, Organizations, Careers, Classes, AI Simulations, and Platform Analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
