@@ -121,74 +121,40 @@ export const DashboardPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 4 Stat Overview Metric Cards with High Density Mini Progress Bars */}
+      {/* 4 Stat Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-[#12131C] border border-[#171923] rounded-xl p-4 sm:p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-medium text-[#94A3B8]">Total Users</p>
-            <span className="text-[10px] text-[#34D399] font-semibold">+14.2%</span>
-          </div>
-          <div className="flex items-baseline gap-2 my-2">
-            <span className="text-2xl font-bold text-[#F8FAFC]">{activeUsers} / {totalUsers}</span>
-            <span className="text-[10px] text-[#94A3B8]">active</span>
-          </div>
-          <div className="w-full bg-[#07080C] h-1 rounded-full overflow-hidden mt-1">
-            <div
-              className="bg-[#FB923C] h-full rounded-full transition-all"
-              style={{ width: `${Math.round((activeUsers / Math.max(totalUsers, 1)) * 100)}%` }}
-            />
+          <p className="text-xs font-medium text-[#94A3B8]">Total Users</p>
+          <div className="my-2">
+            <span className="text-2xl sm:text-3xl font-bold text-[#F8FAFC]">{formatNumber(totalUsers)}</span>
           </div>
         </div>
 
         <div className="bg-[#12131C] border border-[#171923] rounded-xl p-4 sm:p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-medium text-[#94A3B8]">Active Organizations</p>
-            <span className="text-[10px] text-[#34D399] font-semibold">+3 new</span>
-          </div>
-          <div className="flex items-baseline gap-2 my-2">
-            <span className="text-2xl font-bold text-[#F8FAFC]">{activeOrgs} / {totalOrgs}</span>
-            <span className="text-[10px] text-[#94A3B8]">accounts</span>
-          </div>
-          <div className="w-full bg-[#07080C] h-1 rounded-full overflow-hidden mt-1">
-            <div
-              className="bg-[#FB7185] h-full rounded-full transition-all"
-              style={{ width: `${Math.round((activeOrgs / Math.max(totalOrgs, 1)) * 100)}%` }}
-            />
+          <p className="text-xs font-medium text-[#94A3B8]">Active Organizations</p>
+          <div className="my-2">
+            <span className="text-2xl sm:text-3xl font-bold text-[#F8FAFC]">{formatNumber(totalOrgs)}</span>
           </div>
         </div>
 
         <div className="bg-[#12131C] border border-[#171923] rounded-xl p-4 sm:p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-medium text-[#94A3B8]">AI Simulations</p>
-            <span className="text-[10px] text-[#CBD5E1] font-semibold">{totalSims} live</span>
-          </div>
-          <div className="flex items-baseline gap-2 my-2">
-            <span className="text-2xl font-bold text-[#F8FAFC]">{formatNumber(totalCompletedSims || 2450)}</span>
-            <span className="text-[10px] text-[#94A3B8]">runs</span>
-          </div>
-          <div className="w-full bg-[#07080C] h-1 rounded-full overflow-hidden mt-1">
-            <div className="bg-[#FB923C] h-full w-[74%] rounded-full" />
+          <p className="text-xs font-medium text-[#94A3B8]">AI Simulations</p>
+          <div className="my-2">
+            <span className="text-2xl sm:text-3xl font-bold text-[#F8FAFC]">{formatNumber(totalSims)}</span>
           </div>
         </div>
 
         <div className="bg-[#12131C] border border-[#171923] rounded-xl p-4 sm:p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-medium text-[#94A3B8]">Avg Completion</p>
-            <span className="text-[10px] text-[#FBBF24] font-semibold">86.2%</span>
-          </div>
-          <div className="flex items-baseline gap-2 my-2">
-            <span className="text-2xl font-bold text-[#F8FAFC]">{formatNumber(totalCompletedClasses || 3100)}</span>
-            <span className="text-[10px] text-[#94A3B8]">courses</span>
-          </div>
-          <div className="w-full bg-[#07080C] h-1 rounded-full overflow-hidden mt-1">
-            <div className="bg-[#34D399] h-full w-[86%] rounded-full" />
+          <p className="text-xs font-medium text-[#94A3B8]">Avg Completion</p>
+          <div className="my-2">
+            <span className="text-2xl sm:text-3xl font-bold text-[#F8FAFC]">86.2%</span>
           </div>
         </div>
       </div>
 
-      {/* Main Grid: Simulation Activity Chart & Recent Activity Side Feed */}
+      {/* Main Grid: Simulation Activity Chart & Recent Activity Side Feed (Commented out for simplification) */}
+      {/*
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Simulation Practice Activity (8 Cols on Desktop) */}
         <div className="lg:col-span-8 bg-[#12131C] border border-[#171923] rounded-xl p-5 sm:p-6 flex flex-col justify-between">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
             <div>
@@ -254,7 +220,6 @@ export const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        {/* High Density Recent Activity Feed (4 Cols on Desktop) */}
         <div className="lg:col-span-4 bg-[#12131C] border border-[#171923] rounded-xl p-5 sm:p-6 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
@@ -302,6 +267,7 @@ export const DashboardPage: React.FC = () => {
           </button>
         </div>
       </div>
+      */}
 
       {/* High Density Recent Organizations Table */}
       <div className="bg-[#12131C] border border-[#171923] rounded-xl p-5 sm:p-6">

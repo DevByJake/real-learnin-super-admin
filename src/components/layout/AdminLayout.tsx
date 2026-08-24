@@ -26,7 +26,7 @@ export const AdminLayout: React.FC = () => {
       <div className="lg:pl-60 flex flex-col flex-1 min-h-screen">
         <Navbar />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-6 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-6 w-full mx-auto">
           <Outlet />
         </main>
       </div>
