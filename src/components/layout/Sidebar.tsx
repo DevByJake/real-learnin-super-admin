@@ -23,6 +23,7 @@ import { cn } from "../../lib/utils";
 export const Sidebar: React.FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const authUser = useAppSelector((state) => state.auth.user);
   const isOpen = useAppSelector((state) => state.ui.sidebarOpen);
 
   const usersCount = useAppSelector((state) => state.users.users.length);
@@ -244,13 +245,13 @@ export const Sidebar: React.FC = () => {
           {/* Super Admin User info card */}
           <div className="mt-2 pt-3 border-t border-[#171923] px-1.5 flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#FB923C] to-[#FB7185] flex items-center justify-center text-black text-xs font-bold shrink-0">
-              JD
+              {authUser?.avatar || 'JD'}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-medium text-[#F8FAFC] truncate">
-                John Doe
+                {authUser?.name || 'John Doe'}
               </p>
-              <p className="text-[10px] text-[#94A3B8] truncate">Super Admin</p>
+              <p className="text-[10px] text-[#94A3B8] truncate">{authUser?.role || 'Super Admin'}</p>
             </div>
             <div
               className="w-2 h-2 rounded-full bg-[#34D399]"

@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setActiveModal, addToast } from '../../store/slices/uiSlice';
+import { logout } from '../../store/slices/authSlice';
 import { ConfirmDialog } from '../ui/ConfirmDialog';
 
 export const LogoutConfirmModal: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const isOpen = useAppSelector((state) => state.ui.activeModal === 'logoutConfirm');
 
   const handleClose = () => {
@@ -13,6 +16,7 @@ export const LogoutConfirmModal: React.FC = () => {
 
   const handleConfirmLogout = () => {
     handleClose();
+    dispatch(logout());
     dispatch(
       addToast({
         type: 'info',
@@ -20,6 +24,7 @@ export const LogoutConfirmModal: React.FC = () => {
         message: 'You have logged out of the Super Admin console safely.',
       })
     );
+    navigate('/login');
   };
 
   return (

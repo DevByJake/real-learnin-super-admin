@@ -6,9 +6,11 @@ import careersReducer from './slices/careersSlice';
 import classesReducer from './slices/classesSlice';
 import simulationsReducer from './slices/simulationsSlice';
 import activityReducer from './slices/activitySlice';
+import authReducer from './slices/authSlice';
 
 export const store = configureStore({
   reducer: {
+    auth: authReducer,
     ui: uiReducer,
     users: usersReducer,
     organizations: organizationsReducer,

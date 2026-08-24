@@ -27,13 +27,16 @@ export const UserDrawer: React.FC = () => {
   const users = useAppSelector((state) => state.users.users);
   const user = users.find((u) => u.id === selectedUserId);
 
+  const careers = useAppSelector((state) => state.careers.careers);
   const [notes, setNotes] = useState(user?.notes || '');
   const [currentStatus, setCurrentStatus] = useState<UserStatus>(user?.status || 'Active');
+  const [selectedCareerId, setSelectedCareerId] = useState(user?.careerId || 'career-cs');
 
   React.useEffect(() => {
     if (user) {
       setNotes(user.notes || '');
       setCurrentStatus(user.status);
+      setSelectedCareerId(user.careerId || 'career-cs');
     }
   }, [user]);
 
@@ -44,11 +47,14 @@ export const UserDrawer: React.FC = () => {
   };
 
   const handleSave = () => {
+    const selectedCareer = careers.find((c) => c.id === selectedCareerId);
     dispatch(
       updateUser({
         ...user,
         status: currentStatus,
         notes: notes.trim(),
+        careerId: selectedCareerId,
+        careerName: selectedCareer?.name || user.careerName,
       })
     );
     dispatch(
@@ -172,6 +178,23 @@ export const UserDrawer: React.FC = () => {
           </h4>
 
           <div className="space-y-3">
+            <div>
+              <label className="block text-xs font-medium text-[#CBD5E1] mb-1">
+                Career Track & Goal
+              </label>
+              <select
+                value={selectedCareerId}
+                onChange={(e) => setSelectedCareerId(e.target.value)}
+                className="w-full bg-[#0D0E14] border border-[#1F2230] text-[#F8FAFC] text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-[#FB923C]"
+              >
+                {careers.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div>
               <label className="block text-xs font-medium text-[#CBD5E1] mb-1">
                 Account Status

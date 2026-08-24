@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setActiveModal, addToast } from '../../store/slices/uiSlice';
 import { addOrganization } from '../../store/slices/organizationsSlice';
@@ -14,38 +15,44 @@ export const OrgModal: React.FC = () => {
   const isOpen = useAppSelector((state) => state.ui.activeModal === 'addOrg');
 
   const [name, setName] = useState('');
-  const [domain, setDomain] = useState('');
   const [adminName, setAdminName] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [totalSeats, setTotalSeats] = useState(50);
   const [subscriptionTier, setSubscriptionTier] = useState<'Enterprise Pro' | 'Growth' | 'Pilot Team' | 'Standard'>('Growth');
+  const [activeDurationMonths, setActiveDurationMonths] = useState<number>(12);
   const [status, setStatus] = useState<OrganizationStatus>('Active');
-  const [industry, setIndustry] = useState('Enterprise Software');
   const [error, setError] = useState('');
 
   const handleClose = () => {
     dispatch(setActiveModal(null));
     setName('');
-    setDomain('');
     setAdminName('');
     setAdminEmail('');
+    setAdminPassword('');
+    setShowPassword(false);
+    setSubscriptionTier('Growth');
+    setActiveDurationMonths(12);
     setError('');
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !adminEmail.trim()) {
-      setError('Please fill in the Organization name and Primary Admin Email');
+    if (!name.trim() || !adminEmail.trim() || !adminPassword.trim()) {
+      setError('Please fill in the Organization name, Admin Email, and Password');
       return;
     }
 
     const renewalDate = new Date();
-    renewalDate.setFullYear(renewalDate.getFullYear() + 1);
+    renewalDate.setMonth(renewalDate.getMonth() + Number(activeDurationMonths));
+
+    const generatedDomain = name.toLowerCase().replace(/[^a-z0-9]/g, '') + '.com';
 
     dispatch(
       addOrganization({
         name: name.trim(),
-        domain: domain.trim() || name.toLowerCase().replace(/[^a-z0-9]/g, '') + '.com',
+        domain: generatedDomain,
         adminName: adminName.trim() || 'Organization Admin',
         adminEmail: adminEmail.trim(),
         totalParticipants: 0,
@@ -56,7 +63,7 @@ export const OrgModal: React.FC = () => {
         status,
         subscriptionTier,
         renewalDate: renewalDate.toISOString(),
-        industry,
+        industry: 'Enterprise',
       })
     );
 
@@ -64,7 +71,7 @@ export const OrgModal: React.FC = () => {
       addActivityLog({
         type: 'new_organization',
         title: 'New Organization Created',
-        description: `Organization ${name} (${subscriptionTier}, ${totalSeats} seats) provisioned.`,
+        description: `Organization ${name} (${subscriptionTier}, ${totalSeats} seats) provisioned for ${activeDurationMonths} months.`,
         meta: {
           orgName: name,
         },
@@ -75,7 +82,7 @@ export const OrgModal: React.FC = () => {
       addToast({
         type: 'success',
         title: 'Organization provisioned',
-        message: `${name} has been added to Real Learning.`,
+        message: `${name} has been added with ${subscriptionTier} tier (${activeDurationMonths} months active).`,
       })
     );
 
@@ -87,7 +94,7 @@ export const OrgModal: React.FC = () => {
       isOpen={isOpen}
       onClose={handleClose}
       title="Provision Organization"
-      description="Create a new client organization license and allocate learner seats."
+      description="Create a new client organization account, configure subscription plan duration, and set up access."
       maxWidth="lg"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -107,41 +114,52 @@ export const OrgModal: React.FC = () => {
           />
 
           <Input
-            label="Corporate Domain"
-            placeholder="e.g. acme.com"
-            value={domain}
-            onChange={(e) => setDomain(e.target.value)}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Input
             label="Primary Admin Full Name"
             placeholder="e.g. Johnathan Smith"
             value={adminName}
             onChange={(e) => setAdminName(e.target.value)}
           />
+        </div>
 
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Input
-            label="Primary Admin Email"
+            label="Organization Email"
             type="email"
             placeholder="e.g. admin@acme.com"
             value={adminEmail}
             onChange={(e) => setAdminEmail(e.target.value)}
             required
           />
+
+          <div className="w-full">
+            <label className="block text-xs font-medium text-[#CBD5E1] mb-1.5">
+              Organization Password
+            </label>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                required
+                placeholder="••••••••••••"
+                value={adminPassword}
+                onChange={(e) => setAdminPassword(e.target.value)}
+                className="w-full bg-[#0D0E14] border border-[#1F2230] text-[#F8FAFC] text-sm rounded-lg pl-3.5 pr-10 py-2 focus:outline-none focus:border-[#FB923C]/70 focus:ring-1 focus:ring-[#FB923C]/50 transition-all"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
+              >
+                {showPassword ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Input
-            label="Licensed Seats"
-            type="number"
-            min={1}
-            value={totalSeats}
-            onChange={(e) => setTotalSeats(parseInt(e.target.value) || 10)}
-            required
-          />
-
           <Select
             label="Subscription Tier"
             value={subscriptionTier}
@@ -154,6 +172,29 @@ export const OrgModal: React.FC = () => {
           </Select>
 
           <Select
+            label="Active Plan Duration"
+            value={activeDurationMonths}
+            onChange={(e) => setActiveDurationMonths(Number(e.target.value))}
+          >
+            <option value={1}>1 Month (Monthly Trial)</option>
+            <option value={3}>3 Months (Quarterly)</option>
+            <option value={6}>6 Months (Half Year)</option>
+            <option value={12}>1 Year (12 Months)</option>
+            <option value={24}>2 Years (24 Months)</option>
+          </Select>
+
+          <Input
+            label="Licensed Seats"
+            type="number"
+            min={1}
+            value={totalSeats}
+            onChange={(e) => setTotalSeats(parseInt(e.target.value) || 10)}
+            required
+          />
+        </div>
+
+        <div>
+          <Select
             label="Account Status"
             value={status}
             onChange={(e) => setStatus(e.target.value as OrganizationStatus)}
@@ -164,13 +205,6 @@ export const OrgModal: React.FC = () => {
             <option value="Suspended">Suspended</option>
           </Select>
         </div>
-
-        <Input
-          label="Industry / Vertical"
-          placeholder="e.g. Healthcare, Fintech, SaaS, Retail"
-          value={industry}
-          onChange={(e) => setIndustry(e.target.value)}
-        />
 
         <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#1F2230]">
           <Button type="button" variant="secondary" onClick={handleClose}>

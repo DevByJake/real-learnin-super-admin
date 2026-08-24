@@ -15,13 +15,31 @@ import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsConditionsPage } from './pages/TermsConditionsPage';
 import { LegalInformationPage } from './pages/LegalInformationPage';
 import { FaqPage } from './pages/FaqPage';
+import { LoginPage } from './pages/LoginPage';
+import { useAppSelector } from './store/hooks';
+
+const ProtectedAdminRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return <>{children}</>;
+};
 
 export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/admin-dashboard" element={<AdminLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/admin-dashboard"
+            element={
+              <ProtectedAdminRoute>
+                <AdminLayout />
+              </ProtectedAdminRoute>
+            }
+          >
             <Route index element={<DashboardPage />} />
             <Route path="users" element={<UsersPage />} />
             <Route path="organizations" element={<OrganizationsPage />} />
