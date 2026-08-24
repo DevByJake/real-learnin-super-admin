@@ -34,6 +34,18 @@ export const Navbar: React.FC = () => {
     if (path.startsWith('/admin-dashboard/settings')) {
       return { title: 'Platform Settings', category: 'System' };
     }
+    if (path.startsWith('/admin-dashboard/privacy-policy')) {
+      return { title: 'Privacy Policy', category: 'Legal & Support' };
+    }
+    if (path.startsWith('/admin-dashboard/terms-conditions')) {
+      return { title: 'Terms & Conditions', category: 'Legal & Support' };
+    }
+    if (path.startsWith('/admin-dashboard/legal-information')) {
+      return { title: 'Legal Information', category: 'Legal & Support' };
+    }
+    if (path.startsWith('/admin-dashboard/faq')) {
+      return { title: 'Frequently Asked Questions (FAQ)', category: 'Legal & Support' };
+    }
     return { title: 'Super Admin', category: 'Real Learning' };
   };
 

@@ -11,6 +11,10 @@ import { ClassesPage } from './pages/ClassesPage';
 import { SimulationsPage } from './pages/SimulationsPage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import { SettingsPage } from './pages/SettingsPage';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { TermsConditionsPage } from './pages/TermsConditionsPage';
+import { LegalInformationPage } from './pages/LegalInformationPage';
+import { FaqPage } from './pages/FaqPage';
 
 export default function App() {
   return (
@@ -26,6 +30,10 @@ export default function App() {
             <Route path="simulations" element={<SimulationsPage />} />
             <Route path="analytics" element={<AnalyticsPage />} />
             <Route path="settings" element={<SettingsPage />} />
+            <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="terms-conditions" element={<TermsConditionsPage />} />
+            <Route path="legal-information" element={<LegalInformationPage />} />
+            <Route path="faq" element={<FaqPage />} />
           </Route>
           {/* Default and fallback routes */}
           <Route path="/" element={<Navigate to="/admin-dashboard" replace />} />

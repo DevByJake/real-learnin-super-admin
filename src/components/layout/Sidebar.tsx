@@ -12,6 +12,9 @@ import {
   LogOut,
   X,
   ShieldCheck,
+  FileText,
+  Scale,
+  HelpCircle,
 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setSidebarOpen, setActiveModal } from "../../store/slices/uiSlice";
@@ -55,39 +58,54 @@ export const Sidebar: React.FC = () => {
           path: "/admin-dashboard/organizations",
           icon: <Building2 className="w-4 h-4" />,
         },
+        // {
+        //   name: "Careers",
+        //   path: "/admin-dashboard/careers",
+        //   icon: <Compass className="w-4 h-4" />,
+        // },
+      ],
+    },
+    {
+      title: "CONTENT",
+      items: [
+        // {
+        //   name: "Classes",
+        //   path: "/admin-dashboard/classes",
+        //   icon: <GraduationCap className="w-4 h-4" />,
+        // },
         {
-          name: "Careers",
-          path: "/admin-dashboard/careers",
-          icon: <Compass className="w-4 h-4" />,
+          name: "Simulations",
+          path: "/admin-dashboard/simulations",
+          icon: <Sparkles className="w-4 h-4" />,
+          badge: simsCount > 0 ? simsCount : undefined,
         },
       ],
     },
-    // {
-    //   title: "CONTENT",
-    //   items: [
-    //     {
-    //       name: "Classes",
-    //       path: "/admin-dashboard/classes",
-    //       icon: <GraduationCap className="w-4 h-4" />,
-    //     },
-    //     {
-    //       name: "Simulations",
-    //       path: "/admin-dashboard/simulations",
-    //       icon: <Sparkles className="w-4 h-4" />,
-    //       badge: simsCount > 0 ? simsCount : undefined,
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: 'ANALYTICS',
-    //   items: [
-    //     {
-    //       name: 'Analytics',
-    //       path: '/admin-dashboard/analytics',
-    //       icon: <BarChart3 className="w-4 h-4" />,
-    //     },
-    //   ],
-    // },
+    {
+      title: "LEGAL & SUPPORT",
+      items: [
+        {
+          name: "Privacy Policy",
+          path: "/admin-dashboard/privacy-policy",
+          icon: <ShieldCheck className="w-4 h-4" />,
+        },
+        {
+          name: "Terms & Conditions",
+          path: "/admin-dashboard/terms-conditions",
+          icon: <FileText className="w-4 h-4" />,
+        },
+        {
+          name: "Legal Information",
+          path: "/admin-dashboard/legal-information",
+          icon: <Scale className="w-4 h-4" />,
+        },
+        {
+          name: "FAQ",
+          path: "/admin-dashboard/faq",
+          icon: <HelpCircle className="w-4 h-4" />,
+        },
+      ],
+    },
   ];
 
   const handleLinkClick = () => {
