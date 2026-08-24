@@ -16,7 +16,7 @@ interface UIState {
   selectedOrgIdForDrawer: string | null;
   selectedClassIdForDrawer: string | null;
   selectedSimulationIdForDrawer: string | null;
-  activeModal: 'addUser' | 'addOrg' | 'addCareer' | 'addClass' | 'addSimulation' | 'testSimulation' | 'adminProfile' | 'logoutConfirm' | null;
+  activeModal: 'addUser' | 'addOrg' | 'addCareer' | 'addClass' | 'testSimulation' | 'logoutConfirm' | null;
   testSimulationTargetId: string | null;
 }
 

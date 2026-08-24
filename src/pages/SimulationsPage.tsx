@@ -100,15 +100,6 @@ export const SimulationsPage: React.FC = () => {
             Configure conversational AI workplace scenarios, character personas, and grading rubrics.
           </p>
         </div>
-
-        <Button
-          variant="primary"
-          size="sm"
-          leftIcon={<Plus className="w-4 h-4" />}
-          onClick={() => dispatch(setActiveModal('addSimulation'))}
-        >
-          Create AI Simulation
-        </Button>
       </div>
 
       {/* Filter and Search Bar */}

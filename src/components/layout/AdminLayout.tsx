@@ -7,9 +7,7 @@ import { UserModal } from '../modals/UserModal';
 import { OrgModal } from '../modals/OrgModal';
 import { CareerModal } from '../modals/CareerModal';
 import { ClassModal } from '../modals/ClassModal';
-import { SimulationModal } from '../modals/SimulationModal';
 import { SimulationTestModal } from '../modals/SimulationTestModal';
-import { AdminProfileModal } from '../modals/AdminProfileModal';
 import { LogoutConfirmModal } from '../modals/LogoutConfirmModal';
 import { UserDrawer } from '../drawers/UserDrawer';
 import { OrgDrawer } from '../drawers/OrgDrawer';
@@ -39,9 +37,7 @@ export const AdminLayout: React.FC = () => {
       <OrgModal />
       <CareerModal />
       <ClassModal />
-      <SimulationModal />
       <SimulationTestModal />
-      <AdminProfileModal />
       <LogoutConfirmModal />
 
       {/* Global Drawers */}

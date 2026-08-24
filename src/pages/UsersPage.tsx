@@ -185,7 +185,6 @@ export const UsersPage: React.FC = () => {
                 <th className="py-3 px-4">Account Type</th>
                 <th className="py-3 px-4">Organization</th>
                 <th className="py-3 px-4">Career Goal</th>
-                <th className="py-3 px-4">Progress</th>
                 <th className="py-3 px-4">Status</th>
                 <th className="py-3 px-4 text-right">Actions</th>
               </tr>
@@ -193,7 +192,7 @@ export const UsersPage: React.FC = () => {
             <tbody className="divide-y divide-[#171923]">
               {paginatedUsers.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-[#94A3B8]">
+                  <td colSpan={6} className="py-12 text-center text-[#94A3B8]">
                     <div className="max-w-xs mx-auto space-y-2">
                       <Users className="w-8 h-8 text-[#94A3B8] mx-auto opacity-50" />
                       <p className="font-medium text-[#CBD5E1]">No learners found</p>
@@ -264,22 +263,6 @@ export const UsersPage: React.FC = () => {
                       {/* Career */}
                       <td className="py-3.5 px-4">
                         <span className="text-[#CBD5E1] font-medium">{user.careerName}</span>
-                      </td>
-
-                      {/* Progress */}
-                      <td className="py-3.5 px-4">
-                        <div className="w-28 space-y-1">
-                          <div className="flex items-center justify-between text-[10px] text-[#94A3B8]">
-                            <span>{user.progressPercentage}%</span>
-                            <span>{user.completedSimulationsCount} Sims</span>
-                          </div>
-                          <div className="w-full bg-[#07080C] h-1.5 rounded-full overflow-hidden border border-[#1F2230]">
-                            <div
-                              className="h-full gradient-brand"
-                              style={{ width: `${user.progressPercentage}%` }}
-                            />
-                          </div>
-                        </div>
                       </td>
 
                       {/* Status */}

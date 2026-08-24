@@ -136,20 +136,12 @@ export const UserDrawer: React.FC = () => {
           </div>
         </div>
 
-        {/* Learning Track & Progress */}
+        {/* Learning Track */}
         <div className="p-4 bg-[#12131C] border border-[#1F2230] rounded-xl space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-[#CBD5E1] flex items-center gap-1.5">
-              <Compass className="w-4 h-4 text-[#FB923C]" /> Career Goal & Progress
+              <Compass className="w-4 h-4 text-[#FB923C]" /> Career Goal
             </span>
-            <span className="text-xs font-bold text-[#FB923C]">{user.progressPercentage}%</span>
-          </div>
-
-          <div className="w-full bg-[#07080C] h-2 rounded-full overflow-hidden border border-[#1F2230]">
-            <div
-              className="h-full gradient-brand transition-all duration-300"
-              style={{ width: `${user.progressPercentage}%` }}
-            />
           </div>
 
           <p className="text-xs text-[#CBD5E1] font-medium">{user.careerName}</p>

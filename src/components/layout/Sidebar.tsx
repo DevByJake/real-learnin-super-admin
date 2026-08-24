@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
   Users,
@@ -9,14 +9,13 @@ import {
   Sparkles,
   BarChart3,
   Settings,
-  UserCheck,
   LogOut,
   X,
   ShieldCheck,
-} from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setSidebarOpen, setActiveModal } from '../../store/slices/uiSlice';
-import { cn } from '../../lib/utils';
+} from "lucide-react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setSidebarOpen, setActiveModal } from "../../store/slices/uiSlice";
+import { cn } from "../../lib/utils";
 
 export const Sidebar: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -24,69 +23,71 @@ export const Sidebar: React.FC = () => {
   const isOpen = useAppSelector((state) => state.ui.sidebarOpen);
 
   const usersCount = useAppSelector((state) => state.users.users.length);
-  const orgsCount = useAppSelector((state) => state.organizations.organizations.length);
-  const simsCount = useAppSelector((state) => state.simulations.simulations.length);
+  const orgsCount = useAppSelector(
+    (state) => state.organizations.organizations.length,
+  );
+  const simsCount = useAppSelector(
+    (state) => state.simulations.simulations.length,
+  );
 
   const navSections = [
     {
-      title: 'OVERVIEW',
+      title: "OVERVIEW",
       items: [
         {
-          name: 'Dashboard',
-          path: '/admin-dashboard',
+          name: "Dashboard",
+          path: "/admin-dashboard",
           icon: <LayoutDashboard className="w-4 h-4" />,
           exact: true,
         },
       ],
     },
     {
-      title: 'MANAGEMENT',
+      title: "MANAGEMENT",
       items: [
         {
-          name: 'Users',
-          path: '/admin-dashboard/users',
+          name: "Users",
+          path: "/admin-dashboard/users",
           icon: <Users className="w-4 h-4" />,
-          badge: usersCount > 0 ? usersCount : undefined,
         },
         {
-          name: 'Organizations',
-          path: '/admin-dashboard/organizations',
+          name: "Organizations",
+          path: "/admin-dashboard/organizations",
           icon: <Building2 className="w-4 h-4" />,
-          badge: orgsCount > 0 ? orgsCount : undefined,
         },
         {
-          name: 'Careers',
-          path: '/admin-dashboard/careers',
+          name: "Careers",
+          path: "/admin-dashboard/careers",
           icon: <Compass className="w-4 h-4" />,
         },
       ],
     },
-    {
-      title: 'CONTENT',
-      items: [
-        {
-          name: 'Classes',
-          path: '/admin-dashboard/classes',
-          icon: <GraduationCap className="w-4 h-4" />,
-        },
-        {
-          name: 'Simulations',
-          path: '/admin-dashboard/simulations',
-          icon: <Sparkles className="w-4 h-4" />,
-          badge: simsCount > 0 ? simsCount : undefined,
-        },
-      ],
-    },
-    {
-      title: 'ANALYTICS',
-      items: [
-        {
-          name: 'Analytics',
-          path: '/admin-dashboard/analytics',
-          icon: <BarChart3 className="w-4 h-4" />,
-        },
-      ],
-    },
+    // {
+    //   title: "CONTENT",
+    //   items: [
+    //     {
+    //       name: "Classes",
+    //       path: "/admin-dashboard/classes",
+    //       icon: <GraduationCap className="w-4 h-4" />,
+    //     },
+    //     {
+    //       name: "Simulations",
+    //       path: "/admin-dashboard/simulations",
+    //       icon: <Sparkles className="w-4 h-4" />,
+    //       badge: simsCount > 0 ? simsCount : undefined,
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: 'ANALYTICS',
+    //   items: [
+    //     {
+    //       name: 'Analytics',
+    //       path: '/admin-dashboard/analytics',
+    //       icon: <BarChart3 className="w-4 h-4" />,
+    //     },
+    //   ],
+    // },
   ];
 
   const handleLinkClick = () => {
@@ -107,8 +108,8 @@ export const Sidebar: React.FC = () => {
 
       <aside
         className={cn(
-          'fixed top-0 bottom-0 left-0 z-40 w-60 bg-[#0D0E14] border-r border-[#171923] flex flex-col transition-transform duration-200 ease-in-out lg:translate-x-0',
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+          "fixed top-0 bottom-0 left-0 z-40 w-60 bg-[#0D0E14] border-r border-[#171923] flex flex-col transition-transform duration-200 ease-in-out lg:translate-x-0",
+          isOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
         {/* Brand Header */}
@@ -119,7 +120,9 @@ export const Sidebar: React.FC = () => {
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-bold text-sm tracking-tight text-[#F8FAFC]">Real Learning</span>
+                <span className="font-bold text-sm tracking-tight text-[#F8FAFC]">
+                  Real Learning
+                </span>
               </div>
               <span className="text-[10px] uppercase font-bold tracking-wider text-[#FB923C] block">
                 Super Admin
@@ -154,17 +157,19 @@ export const Sidebar: React.FC = () => {
                       to={item.path}
                       onClick={handleLinkClick}
                       className={cn(
-                        'flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium border transition-colors duration-150 group',
+                        "flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium border transition-colors duration-150 group",
                         isActive
-                          ? 'bg-[#12131C] text-[#FB923C] border-[#171923] shadow-xs'
-                          : 'border-transparent text-[#CBD5E1] hover:text-[#F8FAFC] hover:bg-[#12131C]'
+                          ? "bg-[#12131C] text-[#FB923C] border-[#171923] shadow-xs"
+                          : "border-transparent text-[#CBD5E1] hover:text-[#F8FAFC] hover:bg-[#12131C]",
                       )}
                     >
                       <div className="flex items-center gap-2.5">
                         <span
                           className={cn(
-                            'transition-colors duration-150',
-                            isActive ? 'text-[#FB923C]' : 'text-[#94A3B8] group-hover:text-[#CBD5E1]'
+                            "transition-colors duration-150",
+                            isActive
+                              ? "text-[#FB923C]"
+                              : "text-[#94A3B8] group-hover:text-[#CBD5E1]",
                           )}
                         >
                           {item.icon}
@@ -175,10 +180,10 @@ export const Sidebar: React.FC = () => {
                       {item.badge !== undefined && (
                         <span
                           className={cn(
-                            'text-[10px] px-1.5 py-0.5 rounded-md font-semibold transition-colors duration-150',
+                            "text-[10px] px-1.5 py-0.5 rounded-md font-semibold transition-colors duration-150",
                             isActive
-                              ? 'bg-[#FB923C]/20 text-[#FB923C]'
-                              : 'bg-[#171923] text-[#94A3B8]'
+                              ? "bg-[#FB923C]/20 text-[#FB923C]"
+                              : "bg-[#171923] text-[#94A3B8]",
                           )}
                         >
                           {item.badge}
@@ -199,10 +204,10 @@ export const Sidebar: React.FC = () => {
             onClick={handleLinkClick}
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium border transition-colors duration-150',
+                "flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium border transition-colors duration-150",
                 isActive
-                  ? 'bg-[#12131C] text-[#FB923C] border-[#171923]'
-                  : 'border-transparent text-[#CBD5E1] hover:text-[#F8FAFC] hover:bg-[#12131C]'
+                  ? "bg-[#12131C] text-[#FB923C] border-[#171923]"
+                  : "border-transparent text-[#CBD5E1] hover:text-[#F8FAFC] hover:bg-[#12131C]",
               )
             }
           >
@@ -211,15 +216,7 @@ export const Sidebar: React.FC = () => {
           </NavLink>
 
           <button
-            onClick={() => dispatch(setActiveModal('adminProfile'))}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium border border-transparent text-[#CBD5E1] hover:text-[#F8FAFC] hover:bg-[#12131C] transition-colors duration-150 text-left cursor-pointer"
-          >
-            <UserCheck className="w-4 h-4 text-[#94A3B8]" />
-            <span>Admin Profile</span>
-          </button>
-
-          <button
-            onClick={() => dispatch(setActiveModal('logoutConfirm'))}
+            onClick={() => dispatch(setActiveModal("logoutConfirm"))}
             className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium border border-transparent text-[#F87171] hover:bg-[#7F1D1D]/20 transition-colors duration-150 text-left cursor-pointer"
           >
             <LogOut className="w-4 h-4 text-[#F87171]" />
@@ -232,10 +229,15 @@ export const Sidebar: React.FC = () => {
               JD
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-[#F8FAFC] truncate">John Doe</p>
+              <p className="text-xs font-medium text-[#F8FAFC] truncate">
+                John Doe
+              </p>
               <p className="text-[10px] text-[#94A3B8] truncate">Super Admin</p>
             </div>
-            <div className="w-2 h-2 rounded-full bg-[#34D399]" title="System Online" />
+            <div
+              className="w-2 h-2 rounded-full bg-[#34D399]"
+              title="System Online"
+            />
           </div>
         </div>
       </aside>

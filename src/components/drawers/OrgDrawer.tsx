@@ -250,7 +250,6 @@ export const OrgDrawer: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-semibold text-[#FB923C]">{u.progressPercentage}%</span>
                     <Badge variant={u.status === 'Active' ? 'success' : 'muted'} size="sm">
                       {u.status}
                     </Badge>

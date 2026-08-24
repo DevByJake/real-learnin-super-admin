@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setActiveModal, addToast } from '../../store/slices/uiSlice';
+import { setActiveModal } from '../../store/slices/uiSlice';
 import { Modal } from '../ui/Modal';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
-import { ShieldCheck, Mail, Calendar, Key, CheckCircle } from 'lucide-react';
+import { ShieldCheck, Mail, Calendar, CheckCircle } from 'lucide-react';
 
 export const AdminProfileModal: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -12,17 +12,6 @@ export const AdminProfileModal: React.FC = () => {
 
   const handleClose = () => {
     dispatch(setActiveModal(null));
-  };
-
-  const handleSaveSecurity = () => {
-    dispatch(
-      addToast({
-        type: 'success',
-        title: 'Security Settings Saved',
-        message: 'Two-Factor Authentication (2FA) enforcement is active.',
-      })
-    );
-    handleClose();
   };
 
   return (
@@ -83,9 +72,6 @@ export const AdminProfileModal: React.FC = () => {
         <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#1F2230]">
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" leftIcon={<Key className="w-3.5 h-3.5" />} onClick={handleSaveSecurity}>
-            Refresh API Token
           </Button>
         </div>
       </div>
