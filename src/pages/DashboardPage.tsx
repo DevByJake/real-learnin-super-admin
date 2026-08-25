@@ -21,7 +21,6 @@ import { formatNumber, formatDate } from '../lib/utils';
 import {
   setSelectedUserIdForDrawer,
   setSelectedOrgIdForDrawer,
-  setActiveModal,
 } from '../store/slices/uiSlice';
 import {
   ResponsiveContainer,
@@ -434,7 +433,7 @@ export const DashboardPage: React.FC = () => {
             <thead className="text-[10px] text-[#94A3B8] border-b border-[#171923] uppercase tracking-wider">
               <tr>
                 <th className="pb-3 font-semibold">Org Name</th>
-                <th className="pb-3 font-semibold">Primary POC</th>
+                <th className="pb-3 font-semibold">Owner Info</th>
                 <th className="pb-3 font-semibold">Participants</th>
                 <th className="pb-3 font-semibold">Activity</th>
                 <th className="pb-3 font-semibold">Status</th>

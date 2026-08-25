@@ -88,7 +88,7 @@ export const UserDrawer: React.FC = () => {
       isOpen={!!selectedUserId}
       onClose={handleClose}
       title="Learner Administration Profile"
-      subtitle={`ID: ${user.id} • ${user.accountType}`}
+      subtitle={`ID: ${user.id}`}
       footer={
         <div className="flex items-center justify-between">
           <Button
@@ -211,12 +211,12 @@ export const UserDrawer: React.FC = () => {
               </select>
             </div>
 
-            {user.accountType === 'Organization Member' && (
+            {user.organizationName && (
               <div className="p-3 bg-[#171923] border border-[#1F2230] rounded-lg flex items-center justify-between text-xs">
                 <span className="text-[#94A3B8] flex items-center gap-1.5">
                   <Building2 className="w-4 h-4 text-[#34D399]" /> Organization:
                 </span>
-                <span className="font-medium text-[#F8FAFC]">{user.organizationName || 'N/A'}</span>
+                <span className="font-medium text-[#F8FAFC]">{user.organizationName}</span>
               </div>
             )}
 

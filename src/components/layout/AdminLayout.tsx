@@ -3,8 +3,6 @@ import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Navbar } from './Navbar';
 import { ToastContainer } from '../ui/ToastContainer';
-import { UserModal } from '../modals/UserModal';
-import { OrgModal } from '../modals/OrgModal';
 import { CareerModal } from '../modals/CareerModal';
 import { ClassModal } from '../modals/ClassModal';
 import { SimulationTestModal } from '../modals/SimulationTestModal';
@@ -33,8 +31,6 @@ export const AdminLayout: React.FC = () => {
       <ToastContainer />
 
       {/* Global Modals */}
-      <UserModal />
-      <OrgModal />
       <CareerModal />
       <ClassModal />
       <SimulationTestModal />

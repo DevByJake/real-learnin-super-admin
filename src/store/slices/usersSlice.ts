@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User, UserStatus, UserAccountType } from '../../types';
+import { User, UserStatus } from '../../types';
 import { INITIAL_USERS } from '../../data/mockData';
 
 interface UsersState {
   users: User[];
   searchTerm: string;
-  accountTypeFilter: 'All' | UserAccountType;
   statusFilter: 'All' | UserStatus;
   careerFilter: string;
   currentPage: number;
@@ -26,7 +25,6 @@ const loadSavedUsers = (): User[] => {
 const initialState: UsersState = {
   users: loadSavedUsers(),
   searchTerm: '',
-  accountTypeFilter: 'All',
   statusFilter: 'All',
   careerFilter: 'All',
   currentPage: 1,
@@ -40,10 +38,6 @@ export const usersSlice = createSlice({
   reducers: {
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
-      state.currentPage = 1;
-    },
-    setAccountTypeFilter: (state, action: PayloadAction<'All' | UserAccountType>) => {
-      state.accountTypeFilter = action.payload;
       state.currentPage = 1;
     },
     setStatusFilter: (state, action: PayloadAction<'All' | UserStatus>) => {
@@ -94,7 +88,6 @@ export const usersSlice = createSlice({
 
 export const {
   setSearchTerm,
-  setAccountTypeFilter,
   setStatusFilter,
   setCareerFilter,
   setCurrentPage,

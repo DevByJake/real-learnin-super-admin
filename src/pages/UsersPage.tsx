@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   setSearchTerm,
-  setAccountTypeFilter,
   setStatusFilter,
   setCareerFilter,
   setCurrentPage,
@@ -11,14 +10,12 @@ import {
 } from '../store/slices/usersSlice';
 import {
   setSelectedUserIdForDrawer,
-  setActiveModal,
   addToast,
 } from '../store/slices/uiSlice';
 import {
   Users,
   Search,
   Filter,
-  Plus,
   MoreVertical,
   SlidersHorizontal,
   ExternalLink,
@@ -34,14 +31,13 @@ import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { Pagination } from '../components/ui/Pagination';
 import { ConfirmDialog } from '../components/ui/ConfirmDialog';
-import { User, UserStatus, UserAccountType } from '../types';
+import { User, UserStatus } from '../types';
 
 export const UsersPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const {
     users,
     searchTerm,
-    accountTypeFilter,
     statusFilter,
     careerFilter,
     currentPage,
@@ -64,14 +60,11 @@ export const UsersPage: React.FC = () => {
       (u.organizationName && u.organizationName.toLowerCase().includes(effectiveSearch)) ||
       u.careerName.toLowerCase().includes(effectiveSearch);
 
-    const matchesAccountType =
-      accountTypeFilter === 'All' || u.accountType === accountTypeFilter;
-
     const matchesStatus = statusFilter === 'All' || u.status === statusFilter;
 
     const matchesCareer = careerFilter === 'All' || u.careerId === careerFilter;
 
-    return matchesSearch && matchesAccountType && matchesStatus && matchesCareer;
+    return matchesSearch && matchesStatus && matchesCareer;
   });
 
   // Pagination slice
@@ -103,18 +96,9 @@ export const UsersPage: React.FC = () => {
             User Management
           </h1>
           <p className="text-xs sm:text-sm text-[#94A3B8] mt-0.5">
-            Administer individual learners and enterprise organization participants.
+            Administer individual learners and their career track progress.
           </p>
         </div>
-
-        <Button
-          variant="primary"
-          size="sm"
-          leftIcon={<Plus className="w-4 h-4" />}
-          onClick={() => dispatch(setActiveModal('addUser'))}
-        >
-          Add User Account
-        </Button>
       </div>
 
       {/* Filter and Search Bar */}
@@ -134,17 +118,6 @@ export const UsersPage: React.FC = () => {
 
           {/* Filters */}
           <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto">
-            {/* Account Type filter */}
-            <select
-              value={accountTypeFilter}
-              onChange={(e) => dispatch(setAccountTypeFilter(e.target.value as any))}
-              className="bg-[#0D0E14] border border-[#171923] text-[#CBD5E1] text-xs rounded-md px-3 py-1.5 focus:outline-none focus:border-[#FB923C]"
-            >
-              <option value="All">All Types</option>
-              <option value="Individual">Individual</option>
-              <option value="Organization Member">Organization Member</option>
-            </select>
-
             {/* Status Filter */}
             <select
               value={statusFilter}
@@ -182,7 +155,6 @@ export const UsersPage: React.FC = () => {
             <thead>
               <tr className="border-b border-[#171923] bg-[#0D0E14] text-[10px] text-[#94A3B8] uppercase tracking-wider font-semibold">
                 <th className="py-3 px-4">Name & Email</th>
-                <th className="py-3 px-4">Account Type</th>
                 <th className="py-3 px-4">Organization</th>
                 <th className="py-3 px-4">Career Goal</th>
                 <th className="py-3 px-4">Status</th>
@@ -192,7 +164,7 @@ export const UsersPage: React.FC = () => {
             <tbody className="divide-y divide-[#171923]">
               {paginatedUsers.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-[#94A3B8]">
+                  <td colSpan={5} className="py-12 text-center text-[#94A3B8]">
                     <div className="max-w-xs mx-auto space-y-2">
                       <Users className="w-8 h-8 text-[#94A3B8] mx-auto opacity-50" />
                       <p className="font-medium text-[#CBD5E1]">No learners found</p>
@@ -236,16 +208,6 @@ export const UsersPage: React.FC = () => {
                             <div className="text-[11px] text-[#94A3B8]">{user.email}</div>
                           </div>
                         </div>
-                      </td>
-
-                      {/* Account Type */}
-                      <td className="py-3.5 px-4">
-                        <Badge
-                          variant={user.accountType === 'Individual' ? 'outline' : 'brand'}
-                          size="sm"
-                        >
-                          {user.accountType}
-                        </Badge>
                       </td>
 
                       {/* Organization */}

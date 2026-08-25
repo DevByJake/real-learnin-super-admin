@@ -143,7 +143,7 @@ export const ClassesPage: React.FC = () => {
 
             <select
               value={statusFilter}
-              onChange={(e) => dispatch(setStatusFilter(e.target.value))}
+              onChange={(e) => dispatch(setStatusFilter(e.target.value as any))}
               className="bg-[#0D0E14] border border-[#171923] text-[#CBD5E1] text-xs rounded-md px-3 py-1.5 focus:outline-none focus:border-[#FB923C]"
             >
               <option value="All">All Statuses</option>

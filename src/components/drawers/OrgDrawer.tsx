@@ -164,7 +164,7 @@ export const OrgDrawer: React.FC = () => {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-[11px] font-medium text-[#CBD5E1] mb-1">
-                Admin Full Name
+                Owner Full Name
               </label>
               <input
                 type="text"
@@ -176,7 +176,7 @@ export const OrgDrawer: React.FC = () => {
 
             <div>
               <label className="block text-[11px] font-medium text-[#CBD5E1] mb-1">
-                Admin Email Address
+                Owner Email Address
               </label>
               <input
                 type="email"

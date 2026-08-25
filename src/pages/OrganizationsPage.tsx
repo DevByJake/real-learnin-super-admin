@@ -10,13 +10,11 @@ import {
 } from '../store/slices/organizationsSlice';
 import {
   setSelectedOrgIdForDrawer,
-  setActiveModal,
   addToast,
 } from '../store/slices/uiSlice';
 import {
   Building2,
   Search,
-  Plus,
   Globe,
   Mail,
   Users,
@@ -93,15 +91,6 @@ export const OrganizationsPage: React.FC = () => {
             Administer enterprise client licenses, seat capacities, and team activity.
           </p>
         </div>
-
-        <Button
-          variant="primary"
-          size="sm"
-          leftIcon={<Plus className="w-4 h-4" />}
-          onClick={() => dispatch(setActiveModal('addOrg'))}
-        >
-          Provision Organization
-        </Button>
       </div>
 
       {/* Filter and Search Bar */}
@@ -111,7 +100,7 @@ export const OrganizationsPage: React.FC = () => {
             <Search className="w-3.5 h-3.5 text-[#94A3B8] absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Search by organization name, domain, or admin email..."
+              placeholder="Search by organization name, domain, or owner info..."
               value={searchTerm}
               onChange={(e) => dispatch(setSearchTerm(e.target.value))}
               className="w-full bg-[#0D0E14] border border-[#171923] text-[#F8FAFC] placeholder-[#94A3B8]/60 text-xs rounded-md pl-8 pr-4 py-1.5 focus:outline-none focus:border-[#FB923C]/70"
@@ -153,7 +142,7 @@ export const OrganizationsPage: React.FC = () => {
             <thead>
               <tr className="border-b border-[#171923] bg-[#0D0E14] text-[10px] text-[#94A3B8] uppercase tracking-wider font-semibold">
                 <th className="py-3 px-4">Organization Name</th>
-                <th className="py-3 px-4">Admin Contact</th>
+                <th className="py-3 px-4">Owner Info</th>
                 <th className="py-3 px-4">Active / Total Users</th>
                 <th className="py-3 px-4">Seat Utilization</th>
                 <th className="py-3 px-4">Activity Score</th>
