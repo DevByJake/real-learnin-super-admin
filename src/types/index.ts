@@ -147,6 +147,55 @@ export interface AISimulation {
   updatedAt: string;
 }
 
+export interface RubricEvaluationItem {
+  criteria: string;
+  score: number;
+  maxScore: number;
+  weightPercentage: number;
+  feedback: string;
+}
+
+export interface SimulationDialogueTurn {
+  speaker: 'ai' | 'user';
+  name: string;
+  message: string;
+  sentiment?: 'positive' | 'neutral' | 'frustrated' | 'satisfied';
+}
+
+export interface SimulationRun {
+  id: string;
+  simulationId: string;
+  simulationTitle: string;
+  careerId: string;
+  careerName: string;
+  difficulty: SkillDifficulty;
+  
+  // Learner info
+  userId: string;
+  userName: string;
+  userEmail: string;
+  userAvatar?: string;
+  accountType?: string;
+  organizationId?: string;
+  organizationName?: string;
+
+  // Performance
+  score: number;
+  grade: 'Distinction' | 'Pass' | 'Needs Retake';
+  durationMinutes: number;
+  completedAt: string;
+
+  // AI Feedback details
+  aiFeedback: {
+    overallSummary: string;
+    strengths: string[];
+    improvementAreas: string[];
+    coachRecommendation: string;
+    rubricBreakdown: RubricEvaluationItem[];
+    dialogueHighlights?: SimulationDialogueTurn[];
+  };
+}
+
 export interface ActivityLog {
   id: string;
   type: 'user_registration' | 'new_organization' | 'simulation_completed' | 'class_completed' | 'career_updated' | 'security_alert';
