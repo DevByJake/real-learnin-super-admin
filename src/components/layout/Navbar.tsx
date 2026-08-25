@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
       return { title: 'Classes & Curriculum', category: 'Content' };
     }
     if (path.startsWith('/admin-dashboard/simulations')) {
-      return { title: 'AI Simulation Management', category: 'Content' };
+      return { title: 'Recent Simulations & AI Evaluations', category: 'Evaluations' };
     }
     if (path.startsWith('/admin-dashboard/analytics')) {
       return { title: 'Platform Analytics', category: 'Analytics' };
